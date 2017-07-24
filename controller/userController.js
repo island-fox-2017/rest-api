@@ -80,7 +80,7 @@ const signin = function(req,res){
         access: row.access,
         id: row.id
       }, process.env.SECRET);
-      req.header.token = token;
+      req.headers.token = token;
       res.send(token)
     }
     else

@@ -4,8 +4,8 @@ require('dotenv').config()
 
 
 module.exports = function(req,res,next){
-  if(req.header.token){
-    jwt.verify(req.header.token, process.env.SECRET, function(err, decode){
+  if(req.headers.token){
+    jwt.verify(req.headers.token, process.env.SECRET, function(err, decode){
       if(decode.access == 'admin' || req.params.id == decode.id){
         next();
       }else {
