@@ -1,7 +1,7 @@
 # FirstApp
 ### This is the first app with RESTful-API
 
-    Actions:
+## Installation:
     npm init
     express --save=ejs
     npm install --save sequelize
