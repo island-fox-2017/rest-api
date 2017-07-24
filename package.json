@@ -1,0 +1,25 @@
+{
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rusliabdulgani/rest-api.git"
+  },
+  "author": "gani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rusliabdulgani/rest-api/issues"
+  },
+  "homepage": "https://github.com/rusliabdulgani/rest-api#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0",
+    "pg": "^7.0.2",
+    "sequelize": "^4.4.2"
+  }
+}
