@@ -23,4 +23,4 @@ List of user routes:
 | /api/users/:id    |PUT            | Update a user with new info (admin and authenticated user)|
 
 
-##Usage
+## Link Heroku
