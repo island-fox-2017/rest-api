@@ -1,4 +1,6 @@
 const db = require('../models');
+const crypto = require('crypto');
+const hash = require('../helpers/hash');
 
 let signupcreate = function(req, res, next) {
   db.User.create({
@@ -22,9 +24,10 @@ let signinpost = (req, res, next) => {
     where : { username : req.body.username }
   })
   .then(user => {
-    const password = req.body.password
-    if(password == user.password){
-      username : user.username
+    const salt =  user.secret;
+    const hashData = hash(salt, req.body.password)
+    if(hashData == user.password){
+      username: user.username
     } else {
       res.send('Wrong Password')
     }
