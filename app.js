@@ -17,4 +17,4 @@ app.use(bodyParser.json({ type: 'application/x-www-form-urlencoded' }));
 app.use('/', Index);
 app.use('/api', Api);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
