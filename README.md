@@ -16,7 +16,12 @@ Resource How to markdown
 2. https://github.com/workshopper/how-to-markdown | (fork) https://github.com/PDVega/how-to-markdown 
 
 
-Route | Item
-------|------
-Content from cell 1 | Content from cell 2
-Content fro the first column | Content in the second column
+routes | HTTP | Description
+-------|------|------------
+/api/signup | POST | Sign up with new user info
+/api/signin | POST | Sign in while get an access token based on credentials
+/api/users   | GET | Get all the users info (admin only)
+/api/users/:id | GET | Get a single user info (admin and authenticated user)
+/api/users | POST | Create a user (admin only)
+/api/users/:id | DELETE | Delete a user (admin only)
+/api/users/:id | PUT | Update a user with new info (admin and authenticated user)
