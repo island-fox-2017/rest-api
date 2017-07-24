@@ -20,6 +20,13 @@ Aplikasi ini merupakan aplikasi user login sederhana menggunakan metede MVC dan 
 | /users/:id   | DELETE | Delete a user                                  |
 | /users/:id   | PUT    | Update a user with new info                    |
 
+##### List of filter routes:
+
+| Route                      |  HTTP  |                 Description                    |
+|----------------------------|:------:|:----------------------------------------------:|
+| /users/users?name="{name}" | GET    | Get all the users                              |
+| /users/users?name="{na}"   | GET    | Get user based on id user                      |
+
 
 ##### Usage
 
