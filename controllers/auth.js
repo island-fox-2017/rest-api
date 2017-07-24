@@ -33,7 +33,7 @@ let signinpost = (req, res, next) => {
     } else {
       res.send('Wrong Password')
     }
-    var token = jwt.sign({username: user.username, role: user.role, id: user.id}, process.env.TOKEN_KEY)
+    var token = jwt.sign({id: user.id, username: user.username, role: user.role}, process.env.TOKEN_KEY)
     // res.send({
     //   msg : 'Welcome to FirstApp',
     //   token : token

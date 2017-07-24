@@ -8,6 +8,12 @@ This is the first app with RESTful-API
     npm install --save sequelize-cli
     sequelize init
     
+    
+    npm install --save jsonwebtoken
+
+    npm install dotenv --save
+
+    
 ## Setting Database : 
     psql postgres
     postgres# CREATE DATABASE "rest_api";
@@ -17,16 +23,6 @@ This is the first app with RESTful-API
 1. [adam-p](https://github.com/adam-p/markdown-here) | [fork to my repository](https://github.com/PDVega/markdown-here)
 2. [workshopper](https://github.com/workshopper/how-to-markdown) | [fork to my repository](https://github.com/PDVega/how-to-markdown)
 
-
-routes | HTTP | Description
--------|------|------------
-/api/signup | POST | Sign up with new user info
-/api/signin | POST | Sign in while get an access token based on credentials
-/api/users   | GET | Get all the users info (admin only)
-/api/users/:id | GET | Get a single user info (admin and authenticated user)
-/api/users | POST | Create a user (admin only)
-/api/users/:id | DELETE | Delete a user (admin only)
-/api/users/:id | PUT | Update a user with new info (admin and authenticated user)
 
 **Setting Database on Sequelize**
 
@@ -38,7 +34,14 @@ Database Migration (to create table on database)
 
         sequelize db:migrate
 
+### Setting route
 
-npm install --save jsonwebtoken
-
-npm install dotenv --save
+routes | HTTP | Description
+-------|------|------------
+/api/signup | POST | Sign up with new user info
+/api/signin | POST | Sign in while get an access token based on credentials
+/api/users   | GET | Get all the users info (admin only)
+/api/users/:id | GET | Get a single user info (admin and authenticated user)
+/api/users | POST | Create a user (admin only)
+/api/users/:id | DELETE | Delete a user (admin only)
+/api/users/:id | PUT | Update a user with new info (admin and authenticated user)
