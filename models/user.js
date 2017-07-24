@@ -24,6 +24,12 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: true
       }
+    },
+    role: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
     }
   });
   

@@ -1,5 +1,5 @@
 const express = require('express');
-const user = require('./routers/users');
+const api = require('./routers/api');
 const home = require('./routers/index');
 const bodyParser = require('body-parser');
 
@@ -9,6 +9,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use('/', home);
-app.use('/users', user);
+app.use('/api', api);
 
 app.listen(3000)

@@ -1,6 +1,8 @@
 const db = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const garam = bcrypt.genSaltSync(10);
+require('dotenv').config()
 
 const findAll = (req, res) => {
     db.User.findAll()
@@ -17,13 +19,14 @@ const findById =  (req,res)=>{
 }
 
 const addUser = (req, res) =>{
-  let hash = bcrypt.hashSync(req.body.password, garam);
+  let hashPwd = bcrypt.hashSync(req.body.password, garam);
   db.User.create(
     {
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
-      password: hash
+      password: hashPwd,
+      role: req.body.role
     }
   )
   .then( data => {
@@ -44,13 +47,14 @@ const deleteUser = (req, res) =>{
 }
 
 const updateUser =  (req, res) => {
-  let hash = bcrypt.hashSync(req.body.password, garam)
+  let hashPwd = bcrypt.hashSync(req.body.password, garam)
   db.User.update(
     {
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
-      password: hash
+      password: hashPwd,
+      role: req.body.role
     },{
       where: {id:req.params.id}
     }
@@ -60,10 +64,52 @@ const updateUser =  (req, res) => {
   })
 }
 
+const signUp = (req, res) => {
+  let hashPwd = bcrypt.hashSync(req.body.password, garam);
+  db.User.create({
+    name: req.body.name,
+    email: req.body.email,
+    username: req.body.username,
+    password: hashPwd,
+    role: req.body.role
+  })
+  .then( data => {
+    res.send(data)
+  })
+  .catch( err => {
+    res.send(err)
+  })
+}
+
+const signIn = (req, res) => {
+  db.User.findOne({
+    where: {username: req.body.username}
+  })
+  .then( data => {
+    if(bcrypt.compareSync(req.body.password, data.password)){
+      let token = jwt.sign({username: data.username, role:data.role}, process.env.SECRET_KEY)
+      req.headers.token = token;
+      res.send({
+        msg: `User ${data.username} sukses login`,
+        token: token
+      })
+    }else{
+      res.send(`wrong username and/or password`)
+    }
+  })
+  .catch( err => {
+    res.send(err)
+  })
+}
+
+
+
 module.exports = {
   findAll,
   findById,
   addUser,
   deleteUser,
-  updateUser
+  updateUser,
+  signIn,
+  signUp
 }
