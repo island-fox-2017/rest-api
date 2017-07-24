@@ -77,7 +77,8 @@ const signin = function(req,res){
     {
       const token = jwt.sign({
         username: row.username,
-        access: row.access
+        access: row.access,
+        id: row.id
       }, process.env.SECRET);
       req.header.token = token;
       res.send(token)
