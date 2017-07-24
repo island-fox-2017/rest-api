@@ -73,7 +73,10 @@ var signin = (req,res) => {
   .then(data => {
     if(bcrypt.compareSync(req.body.password, data.password)){
       var token = jwt.sign({username: data.username, role:data.role}, 'secret-key')
-      res.send('login sukses '+ token)
+      res.send({
+        msg : 'login sukses ',
+        token: token
+      })
     }else {
       res.send('invalid username & password')
     }

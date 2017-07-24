@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/userController');
+var auth = require('../helpers/helper')
+
 /* GET users listing. */
-router.post('/', controller.createUser);
-router.get('/', controller.getAllUser);
+router.post('/',auth, controller.createUser);
+router.get('/',auth, controller.getAllUser);
 router.get('/:id', controller.getOneUser);
 router.put('/:id', controller.updateUser);
-router.delete('/:id', controller.deleteUser);
+router.delete('/:id',auth, controller.deleteUser);
 
 module.exports = router;
