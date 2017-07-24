@@ -27,4 +27,4 @@ npm init
 npm install
 node app.js
 
-access website via http://localhost:<port base on app.js> 
+access website via http://localhost:3000
