@@ -1,5 +1,8 @@
 'use strict'
 const model = require('../models');
+const jwt = require('jsonwebtoken');
+const register = require('../helpers/register')
+require('dotenv').config()
 
 const findAllUser = function(req, res){
   model.User.findAll()
@@ -37,8 +40,7 @@ const updateUser = function(req,res){
     name: req.body.name,
     username: req.body.username,
     password: req.body.password,
-    access: req.body.access,
-    key: req.body.key
+    access: req.body.access
   },{
     where: {
       id: req.params.id
@@ -70,9 +72,15 @@ const signin = function(req,res){
     }
   })
   .then(function(row){
-    if(row.password == req.body.password)
+    const pass = register.hashPass(req.body.password, row.key)
+    if(row.password == pass)
     {
-      res.send('berhasil login')
+      const token = jwt.sign({
+        username: row.username,
+        access: row.access
+      }, process.env.SECRET);
+      req.header.token = token;
+      res.send(token)
     }
     else
     {
@@ -80,22 +88,25 @@ const signin = function(req,res){
     }
   })
   .catch(function(err){
-
+    res.send(err)
   })
 }
 
 const signup = function(req,res){
+  const key = register.randomKey()
+  const pass = register.hashPass(req.body.password, key)
   model.User.create({
     name: req.body.name,
     username: req.body.username,
-    password: req.body.password,
-    access: req.body.access,
-    key: req.body.key
+    password: pass,
+    access: 'admin',
+    key: key
   })
   .then(function(){
     res.send('signup berhasil')
   })
 }
+
 
 module.exports = {
   findByIdUser,
