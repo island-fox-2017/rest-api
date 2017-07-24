@@ -1,0 +1,27 @@
+{
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "Demo app with basic REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sukmahd/rest-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sukmahd/rest-api/issues"
+  },
+  "homepage": "https://github.com/sukmahd/rest-api#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-generator": "^4.15.0",
+    "pg": "^7.0.2",
+    "sequelize": "^4.4.2",
+    "sequelize-cli": "^2.7.0"
+  }
+}
