@@ -5,10 +5,30 @@ const hash = require('../helpers/crypto');
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING,
-    role: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    role: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
     key: DataTypes.STRING
   }, {
     hooks: {

@@ -30,6 +30,11 @@ let createUser = (req, res) => {
   .then(data_create => {
     res.send(data_create);
   })
+  .catch(err => {
+    return res.status(400).send({
+      message: err.message
+    })
+  })
 }
 
 let editDataUser = (req, res) => {
@@ -47,6 +52,9 @@ let editDataUser = (req, res) => {
   })
   .then(data_update => {
     res.send('Data update success!');
+  })
+  .catch(err => {
+    res.send(err);
   })
 }
 
