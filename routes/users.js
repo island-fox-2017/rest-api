@@ -1,49 +1,18 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../models')
+const auth = require('../helpers/authorizer');
+const db = require('../models');
+const jwt = require('jsonwebtoken');
+const router = require('express').Router();
+const usrCtrl = require('../controller/usrCtrl');
 
 
-/* GET users listing. */
+router.get('/', auth.isAdmin, usrCtrl.findAll);
 
-router.get('/', (req, res, next) => {
-  db.User.findAll()
-  .then(data => {
-    res.json(data)
-  })
-})
+router.get('/:id', auth.isBoth, usrCtrl.findById);
 
+router.post('/', auth.isAdmin, usrCtrl.create);
 
-router.get('/:id', (req, res, next) => {
-  db.User.findById(req.params.id)
-  .then(data => {
-    res.json(data)
-  })
-})
-router.delete('/:id', (req, res, next) => {
-  db.User.destroy({
-    where : {
-      id : req.params.id
-    }
-  })
-  .then(() => {
-    res.send(`user ${req.params.id} deleted`)
-  })
-})
+router.delete('/:id', auth.isAdmin, usrCtrl.delete);
 
-
-router.put('/:id', (req, res, next) => {
-  db.User.update({
-    username : req.body.username,
-    password : req.body.password
-  }, {
-    where : {
-      id : req.params.id
-    }
-  })
-  .then(data => {
-    res.send('updated')
-  })
-})
-
+router.put('/:id', auth.isBoth, usrCtrl.update);
 
 module.exports = router;

@@ -5,9 +5,9 @@
 
 ### Usage
 1. Install required npm(s)
-   * npm install
+  * `npm install`
 2. Run the app by entering following into command line
-   * npm start
+  * `npm start`
 3. This app use **postgre** for database. You may change it with your preferred database.
 
 

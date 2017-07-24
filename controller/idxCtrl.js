@@ -1,4 +1,10 @@
 const db = require('../models');
+const crypt = require('../helpers/crypt.js')
+const idxCtrl = require('../controller/idxCtrl');
+const jwt = require('jsonwebtoken')
+require('dotenv').config();
+
+const salt = process.env.SALT
 
 exports.create = (req, res) => {
   db.User.create(req.body)
@@ -14,7 +20,13 @@ exports.findOne = (req, res) => {
       username : req.body.username
     }
   })
-  .then(() => {
-    res.send('signed in')
+  .then(data => {
+    // res.json(data)
+    let pass = crypt(req.body.password, data.salt);
+    if (pass === data.password) {
+      let token = jwt.sign({id: data.id, name: data.name, username: data.username, role: data.role}, salt);
+      // console.log(token);
+      res.send(token)
+    }
   });
 };

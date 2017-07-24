@@ -1,32 +1,16 @@
-var express = require('express');
-var router = express.Router();
 var db = require('../models');
+var idxCtrl = require('../controller/idxCtrl');
+var jwt = require('jsonwebtoken')
+var router = require('express').Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/signup', (req, res, next) => {
-  db.User.create({
-    username : req.body.username,
-    password : req.body.password
-  })
-  .then(() => {
-    res.send('signed up')
-  })
-})
+router.post('/signup', idxCtrl.create)
 
-router.post('/signin', (req, res, next) => {
-  db.User.findOne({
-    where : {
-      username : req.body.username
-    }
-  })
-  .then(() => {
-    res.send('signed in')
-  })
-})
+router.post('/signin', idxCtrl.findOne)
 
 
 module.exports = router;
