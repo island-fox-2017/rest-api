@@ -2,6 +2,7 @@ var db = require('../models');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
+require('dotenv').config()
 
 var createUser = (req,res) => {
   var hash = bcrypt.hashSync(req.body.password, salt);
@@ -72,7 +73,7 @@ var signin = (req,res) => {
   })
   .then(data => {
     if(bcrypt.compareSync(req.body.password, data.password)){
-      var token = jwt.sign({username: data.username, role:data.role}, 'secret-key')
+      var token = jwt.sign({username: data.username, role:data.role}, process.env.SECRET_KEY)
       res.send({
         msg : 'login sukses ',
         token: token
