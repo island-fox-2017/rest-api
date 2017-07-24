@@ -10,3 +10,5 @@ List of basic routes:
 | /api/hello?name={name}         | GET           | Welcome page |
 
 List of user routes:
+
+<span style="color:blue">some *This is Blue italic.* text</span>
