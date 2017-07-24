@@ -24,4 +24,4 @@ npm install --save pg-hstore
 npm install --save express
 npm install --save body-parser
 ```
-Access the website via http://localhost:3000
+Access the website API via http://localhost:3000/api
