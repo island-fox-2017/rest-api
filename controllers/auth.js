@@ -1,9 +1,10 @@
-const db = require('../models')
+const db = require('../models');
 
 let signupcreate = function(req, res, next) {
   db.User.create({
     username : req.body.username,
     password : req.body.password,
+    role : req.body.role,
     createdAt : new Date(),
     updatedAt : new Date()
   })
