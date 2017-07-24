@@ -1,4 +1,7 @@
 'use strict';
+
+const genSalt = require('../helpers/generatesalt');
+
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     // username: DataTypes.STRING,
@@ -21,11 +24,15 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: true
       }
-    }
+    },
+    salt: DataTypes.STRING
   }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
+    hooks: {
+      beforeCreate: function(models) {
+        let salt = genSalt.genRandomString(8);
+        let password = models.password
+        models.password = genSalt.createHash(password, salt);
+        models.salt = salt;
       }
     }
   });
