@@ -1,7 +1,37 @@
+require('dotenv').config()
 const db = require('../models');
 var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(7);
 var jwt = require('jsonwebtoken');
+const secret = process.env.SECRET
+
+function signUp(req, res, next) {
+  var hash = bcrypt.hashSync(req.body.password, salt)
+  db.User.create({
+    username : req.body.username,
+    password : hash,
+    email : req.body.email,
+    role : req.body.role
+  })
+  .then(data => res.send(data))
+  .catch(err => res.send(err.message))
+}
+
+function signIn(req, res, next) {
+  db.User.findOne({
+    where: {username : req.body.username}
+  })
+  .then(data => {
+    if (bcrypt.compareSync(req.body.password, data.password)) {
+      var token = jwt.sign({username: data.username, role: data.role}, secret)
+      res.send(token)
+      // res.send(`Selamat Datang ${data.username}, Anda Login sebagai ${data.role} dengan Token : ${token}`)
+    } else {
+      res.send(`Invalid username or password`)
+    }
+  }) 
+  .catch(err => res.send(err.message))
+}
 
 function getAllUsers(req, res, next) {
   db.User.findAll({
@@ -60,33 +90,6 @@ function updateUser(req, res, next) {
       .then(() => res.send('Update User Successfully'))
       .catch(err => res.send(err.message))
     })
-}
-
-function signUp(req, res, next) {
-  var hash = bcrypt.hashSync(req.body.password, salt)
-  db.User.create({
-    username : req.body.username,
-    password : hash,
-    email : req.body.email,
-    role : req.body.role
-  })
-  .then(data => res.send(data))
-  .catch(err => res.send(err.message))
-}
-
-function signIn(req, res, next) {
-  db.User.findOne({
-    where: {username : req.body.username}
-  })
-  .then(data => {
-    if (bcrypt.compareSync(req.body.password, data.password)) {
-      var token = jwt.sign({username: data.username, role: data.role}, 'biliman')
-      res.send(`Selamat Datang ${data.username}, Anda Login sebagai ${data.role}`)
-    } else {
-      res.send(`Invalid username or password`)
-    }
-  }) 
-  .catch(err => res.send(err.message))
 }
 
 module.exports = {getAllUsers, getUserById, createUser, deleteUser, updateUser, signUp, signIn}
