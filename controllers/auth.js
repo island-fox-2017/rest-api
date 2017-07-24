@@ -1,6 +1,7 @@
 const db = require('../models');
 const crypto = require('crypto');
 const hash = require('../helpers/hash');
+const jwt = require('jsonwebtoken');
 
 let signupcreate = function(req, res, next) {
   db.User.create({
@@ -31,7 +32,8 @@ let signinpost = (req, res, next) => {
     } else {
       res.send('Wrong Password')
     }
-    res.send('Welcome to FirstApp')
+    var token = jwt.sign({username : user.username}, 'Ve6a')
+    res.send(token)
   })
   .catch(err => {
       res.send('User not found')
