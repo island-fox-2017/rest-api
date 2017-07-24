@@ -27,3 +27,13 @@ routes | HTTP | Description
 /api/users | POST | Create a user (admin only)
 /api/users/:id | DELETE | Delete a user (admin only)
 /api/users/:id | PUT | Update a user with new info (admin and authenticated user)
+
+**Setting Database on Sequelize**
+
+Create Model
+        
+        sequelize model:create --name User --attributes username:string,password:string
+
+Database Migration
+
+        sequelize db:migrate
