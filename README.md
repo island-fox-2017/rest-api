@@ -12,8 +12,8 @@ psql postgres
 CREATE DATABASE "rest_api";
 
 Resource How to markdown
-1. https://github.com/adam-p/markdown-here | (fork) https://github.com/PDVega/markdown-here
-2. https://github.com/workshopper/how-to-markdown | (fork) https://github.com/PDVega/how-to-markdown 
+1. [adam-p]https://github.com/adam-p/markdown-here | (fork) https://github.com/PDVega/markdown-here
+2. [workshopper]https://github.com/workshopper/how-to-markdown | (fork) https://github.com/PDVega/how-to-markdown 
 
 
 routes | HTTP | Description
