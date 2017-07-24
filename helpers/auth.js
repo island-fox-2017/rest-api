@@ -2,10 +2,11 @@
 const crypto = require('crypto');
 const hash = require('../helpers/hash');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 let authorizeAdmin = (req, res, next) => {
   let token = req.headers.token
-  jwt.verify(token, 'Ve6a', (err, decoded) => {
+  jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
     // console.log(decoded);
     if(decoded.role === 'admin'){
       next()
@@ -18,7 +19,7 @@ let authorizeAdmin = (req, res, next) => {
 let authorizeUser = (req, res, next) => {
   let token = req.headers.token
   let id = req.params.id
-  jwt.verify(token, 'Ve6a', (err, decoded) => {
+  jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
     console.log(decoded);
     if(decoded.role === 'admin' || decoded.id == id){
       next()

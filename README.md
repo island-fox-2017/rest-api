@@ -40,3 +40,5 @@ Database Migration (to create table on database)
 
 
 npm install --save jsonwebtoken
+
+npm install dotenv --save

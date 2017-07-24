@@ -2,6 +2,7 @@ const db = require('../models');
 const crypto = require('crypto');
 const hash = require('../helpers/hash');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 let signupcreate = function(req, res, next) {
   db.User.create({
@@ -32,7 +33,7 @@ let signinpost = (req, res, next) => {
     } else {
       res.send('Wrong Password')
     }
-    var token = jwt.sign({username: user.username, role: user.role, id: user.id}, 'Ve6a')
+    var token = jwt.sign({username: user.username, role: user.role, id: user.id}, process.env.TOKEN_KEY)
     // res.send({
     //   msg : 'Welcome to FirstApp',
     //   token : token
