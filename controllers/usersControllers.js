@@ -1,4 +1,6 @@
 const db = require('../models');
+const bcrypt = require('bcrypt');
+const garam = bcrypt.genSaltSync(10);
 
 const findAll = (req, res) => {
     db.User.findAll()
@@ -15,12 +17,13 @@ const findById =  (req,res)=>{
 }
 
 const addUser = (req, res) =>{
+  let hash = bcrypt.hashSync(req.body.password, garam);
   db.User.create(
     {
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
-      password: req.body.password
+      password: hash
     }
   )
   .then( data => {
@@ -38,12 +41,13 @@ const deleteUser = (req, res) =>{
 }
 
 const updateUser =  (req, res) => {
+  let hash = bcrypt.hashSync(req.body.password, garam)
   db.User.update(
     {
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
-      password: req.body.password
+      password: hash
     },{
       where: {id:req.params.id}
     }
