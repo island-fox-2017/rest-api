@@ -106,6 +106,9 @@ const signup = function(req,res){
   .then(function(){
     res.send('signup berhasil')
   })
+  .catch(function(err){
+    res.send(err)
+  })
 }
 
 
