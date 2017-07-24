@@ -1,72 +1,34 @@
 'use strict'
 
-
 const express = require('express');
 const router = express.Router();
-const model = require('../models')
-
+const model = require('../models');
+const controller = require('../controller/userController');
 
 router.get('/', function(req,res){
   res.send('welcome')
 })
 
-router.get('/users', function(req,res){
-  model.User.findAll()
-  .then(function(rows){
-    res.send(rows);
-  })
-})
+router.post('/signup', controller.signup)
 
-router.get('/users/:id', function(req,res){
-  model.User.findById(req.params.id)
-  .then(function(row){
-    res.send(row);
-  })
-})
+router.post('/signin', controller.signin)
 
-router.post('/users', function(req,res){
-  model.User.create({
-    name: req.body.name,
-    username: req.body.username,
-    password: req.body.password,
-    access: req.body.access,
-    key: req.body.key
-  })
-  .then(function(){
-    res.send('data masuk')
-  })
-})
+router.get('/users', controller.findAllUser)
 
-router.delete('/users/:id', function(req,res){
-  model.User.delete({
-    where:{
-      id: req.params.id
-    }
-  })
-  .then(function(){
-    res.send('data deleted')
-  })
-})
+router.get('/users/:id', controller.findByIdUser)
 
-router.put('/users/:id', function(req,res){
-  model.User.update({
-    name: req.body.name,
-    username: req.body.username,
-    password: req.body.password,
-    access: req.body.access,
-    key: req.body.key
-  },{
-    where:
-    {
-      id:id
-    }
-  })
-  .then(function(){
-    res.send('data updated')
-  })
-})
+router.post('/users', controller.createUser)
+
+router.delete('/users/:id', controller.deleteUser)
+
+router.put('/users/:id', controller.updateUser)
 
 
 
 
 module.exports = router;
+
+// bungkus jd token
+//requiere jsonwtoken
+//login get toket d jwt sign
+//middleware di doc jwt

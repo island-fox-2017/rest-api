@@ -5,8 +5,10 @@ const app = express();
 const model = require('./models');
 const bodyParser = require('body-parser')
 
+app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.json({type: 'application/x-www-form-urlencoded'}))
 
 const api = require('./routers/api');
 
