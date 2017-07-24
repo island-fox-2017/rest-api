@@ -6,5 +6,6 @@ Demo app with basic REST API
 
 List of basic routes:
 
-Route                     | HTTP | Description
-/api/helllo?name = {name} | GET  | Print hello, name
+| Route                     | HTTP | Description      |
+| ------------- |:-------------:| -----:|
+| /api/helllo?name = {name} | GET  | Print hello, name|
