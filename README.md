@@ -22,5 +22,6 @@ sequelize init
 npm install --save pg@6
 npm install --save pg-hstore
 npm install --save express
+npm install --save body-parser
 ```
-Access the website via http://localhost:3000 or API via httP://localhost:3000?api
+Access the website via http://localhost:3000
