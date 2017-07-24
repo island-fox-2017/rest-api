@@ -10,6 +10,9 @@ exports.create = (req, res) => {
   db.User.create(req.body)
   .then(() => {
     res.send('signed up');
+  })
+  .catch(err => {
+    res.send(err);
   });
 };
 
@@ -28,5 +31,8 @@ exports.findOne = (req, res) => {
       // console.log(token);
       res.send(token)
     }
+  })
+  .catch(err => {
+    res.send(err);
   });
 };

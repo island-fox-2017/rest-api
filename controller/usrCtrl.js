@@ -6,6 +6,9 @@ exports.findAll = (req, res) => {
   db.User.findAll()
   .then(data => {
     res.json(data);
+  })
+  .catch(err => {
+    res.send(err);
   });
 };
 
@@ -14,6 +17,9 @@ exports.findById = (req, res) => {
   db.User.findById(req.params.id)
   .then(data => {
     res.json(data);
+  })
+  .catch(err => {
+    res.send(err);
   });
 };
 
@@ -40,6 +46,9 @@ exports.delete = (req, res) => {
   })
   .then(() => {
     res.send(`user ${req.params.id} deleted`);
+  })
+  .catch(err => {
+    res.send(err);
   });
 };
 
@@ -52,5 +61,8 @@ exports.update = (req, res, next) => {
   })
   .then(() => {
     res.send('updated');
+  })
+  .catch(err => {
+    res.send(err);
   });
 };

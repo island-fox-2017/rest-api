@@ -31,25 +31,35 @@ let isCurrentUser = (req, res, next) => {
     } else {
       res.send('Not your account');
     }
-  });
+  })
   // console.log('bukan user');
 };
 
 
+// let isBoth = (req, res, next) => {
+//   let admin = isAdmin(req, res, next);
+//   let currentUser = isCurrentUser(req, res, next);
+//
+//   if(admin || currentUser) {
+//     console.log('isBoth');
+//     next();
+//   } else {
+//     res.send('Not user');
+//   }
+// };
+
 let isBoth = (req, res, next) => {
-  let admin = isAdmin(req, res, next);
-  console.log('admin');
-  console.log(admin);
-  let currentUser = isCurrentUser(req, res, next);
-  if(admin || currentUser) {
-    // console.log('isBoth');
+  let token = req.headers.token;
+  let auth = jwt.verify(token, salt);
+  console.log(token);
+  console.log(auth);
+
+  if (auth.role === 'admin' || (auth.role !== 'admin' && auth.id == req.params.id) ) {
     next();
   } else {
-    res.send('Not user');
+    res.send('unauthorized user')
   }
 };
-
-
 
 
 module.exports = {
