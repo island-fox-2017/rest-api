@@ -1,5 +1,5 @@
 # FirstApp
-### This is the first app with RESTful-API
+This is the first app with RESTful-API
 
 ## Installation:
     npm init
