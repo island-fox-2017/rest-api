@@ -21,12 +21,6 @@ function getsingleuserbyid(req, res, next) {
   .then(dataUser => {
     console.log(dataUser);
     res.send(dataUser)
-    // res.status(200)
-    //   .json({
-    //     status: 'success',
-    //     data: dataAllUser,
-    //     message: 'Retrieved All Users'
-    //   });
   })
   .catch(err => {
     return next(err)

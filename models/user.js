@@ -25,7 +25,8 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true
       }
     },
-    salt: DataTypes.STRING
+    salt: DataTypes.STRING,
+    role: DataTypes.STRING
   }, {
     hooks: {
       beforeCreate: function(models) {

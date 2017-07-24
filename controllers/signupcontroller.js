@@ -4,7 +4,8 @@ function signupnewuser(req,res){
   Models.User.create({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    role: req.body.role
   })
   .then((data) => {
     res.status(200).json({message: 'Success create'})
