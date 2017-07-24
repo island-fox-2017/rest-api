@@ -37,3 +37,6 @@ Create Model User
 Database Migration (to create table on database)
 
         sequelize db:migrate
+
+
+npm install --save jsonwebtoken
