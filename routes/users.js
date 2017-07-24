@@ -1,16 +1,17 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../models')
-var controllers = require('../controllers/users')
+const express = require('express');
+const router = express.Router();
+const db = require('../models')
+const controllers = require('../controllers/users')
+const middleware = require('../helpers/auth')
 
-router.get('/', controllers.getfindAll);
+router.get('/', middleware.authorizeAdmin, controllers.getfindAll);
 
-router.get('/:id', controllers.getfindById);
+router.get('/:id', middleware.authorizeUser, controllers.getfindById);
 
-router.post('/', controllers.postcreate)
+router.post('/', middleware.authorizeAdmin, controllers.postcreate)
 
-router.delete('/:id', controllers.deletedestroy)
+router.delete('/:id', middleware.authorizeAdmin, controllers.deletedestroy)
 
-router.put('/:id', controllers.putfindById)
+router.put('/:id', middleware.authorizeUser, controllers.putfindById)
 
 module.exports = router;

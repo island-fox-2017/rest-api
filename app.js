@@ -25,9 +25,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/api/users', users);
 app.use('/api/', auth);
 
+// app.use((req, res, next) => {
+//   if(req.headers.token){
+//     next();
+//   } else {
+//     res.send('You don\'t have access right!' )
+//   }
+// })
+
+app.use('/api/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -26,6 +26,11 @@ let postcreate = (req, res, next) => {
   .then(() => {
     res.send('/api/admin post create user')
   })
+  .catch(err => {
+    return res.status(400).send({
+      message : err.message
+    })
+  })
 }
 
 let deletedestroy = (req, res, next) => {

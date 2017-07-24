@@ -32,7 +32,11 @@ let signinpost = (req, res, next) => {
     } else {
       res.send('Wrong Password')
     }
-    var token = jwt.sign({username : user.username}, 'Ve6a')
+    var token = jwt.sign({username: user.username, role: user.role, id: user.id}, 'Ve6a')
+    // res.send({
+    //   msg : 'Welcome to FirstApp',
+    //   token : token
+    // })
     res.send(token)
   })
   .catch(err => {

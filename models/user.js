@@ -6,8 +6,18 @@ const hash = require('../helpers/hash');
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
+    username: {
+      type : DataTypes.STRING,
+      validate : {
+        notEmpty : true
+      }
+  },
+    password: {
+      type : DataTypes.STRING,
+      validate : {
+        notEmpty : true
+      }
+  },
     role: DataTypes.STRING,
     secret: DataTypes.STRING
   },{
