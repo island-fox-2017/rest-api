@@ -6,7 +6,7 @@ function admin(req, res, next) {
   let token = req.headers.token
   if (token) {
     jwt.verify(token, secret, (err, data) => {
-      console.log(data);
+      // console.log(data);
       if (data.role == "admin") {
         next()
       } else {
