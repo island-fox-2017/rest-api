@@ -30,10 +30,10 @@ routes | HTTP | Description
 
 **Setting Database on Sequelize**
 
-Create Model
+Create Model User
         
         sequelize model:create --name User --attributes username:string,password:string
 
-Database Migration
+Database Migration (to create table on database)
 
         sequelize db:migrate
