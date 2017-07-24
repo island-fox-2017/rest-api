@@ -17,6 +17,23 @@ function getallusers(req, res, next) {
   });
 }
 
+function getsingleuserbyid(req, res, next) {
+  Models.User.findById(req.params.id)
+  .then(dataUser => {
+    console.log(dataUser);
+    res.send(dataUser)
+    // res.status(200)
+    //   .json({
+    //     status: 'success',
+    //     data: dataAllUser,
+    //     message: 'Retrieved All Users'
+    //   });
+  })
+  .catch(err => {
+    return next(err)
+  });
+}
+
 function createnewuser(req,res){
   Models.User.create({
     username: req.body.username,
@@ -60,6 +77,7 @@ function deletedatauser(req, res, next) {
 
 module.exports = {
   getallusers,
+  getsingleuserbyid,
   createnewuser,
   updatedatauser,
   deletedatauser
