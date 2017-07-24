@@ -1,17 +1,19 @@
 # FirstApp
 This is the first app with RESTful-API
 
-## Installation:
+## Installation :
     npm init
     express --save=ejs
     npm install --save sequelize
     npm install --save sequelize-cli
     sequelize init
+    
+## Setting Database : 
+    psql postgres
+    postgres# CREATE DATABASE "rest_api";
 
-psql postgres
-CREATE DATABASE "rest_api";
 
-Resource How to markdown
+**Resource How to markdown**
 1. [adam-p](https://github.com/adam-p/markdown-here) | [fork to my repository](https://github.com/PDVega/markdown-here)
 2. [workshopper](https://github.com/workshopper/how-to-markdown) | [fork to my repository](https://github.com/PDVega/how-to-markdown)
 
