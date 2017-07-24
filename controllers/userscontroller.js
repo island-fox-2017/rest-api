@@ -1,4 +1,5 @@
 const Models = require('../models');
+const Sequelize = require('sequelize')
 
 function getallusers(req, res, next) {
   Models.User.findAll()
@@ -22,8 +23,13 @@ function createnewuser(req,res){
     email: req.body.email,
     password: req.body.password
   })
-  .then(function(){
-    res.redirect('/users')
+  .then((data) => {
+    res.status(200).json({message: 'Success create'})
+  })
+  .catch((err) => {
+    return res.status(400).send({
+      message: err.message
+    })
   })
 }
 
@@ -33,9 +39,8 @@ function updatedatauser(req, res, next) {
       id: req.params.id
     }
   })
-  .then(function(data){
-    // res.redirect('/users')
-    res.send(data)
+  .then((data) =>{
+    res.status(200).json({message: 'Data updated'})
   })
   .catch(err => {
     console.log(err);
@@ -49,8 +54,13 @@ function deletedatauser(req, res, next) {
     }
   })
   .then(data => {
-    res.redirect('/users')
+    res.status(200).json({message: 'Data deleted'})
   })
 }
 
-module.exports = {getallusers, createnewuser, updatedatauser, deletedatauser}
+module.exports = {
+  getallusers,
+  createnewuser,
+  updatedatauser,
+  deletedatauser
+}
