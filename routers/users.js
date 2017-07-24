@@ -1,62 +1,17 @@
 const express = require('express');
-const db = require('../models')
+const controller = require('../controllers/usersControllers')
 
 var router = express.Router()
 
-router.get('/', (req, res) => {
-  db.User.findAll()
-  .then( data => {
-    res.send(data);
-  })
-})
+router.get('/', controller.findAll)
 
-router.get('/:id', (req,res)=>{
-  db.User.findById(req.params.id)
-  .then( data =>{
-    res.send(data)
-  })
-})
+router.get('/:id', controller.findById)
 
-router.post('/', (req, res) =>{
-  db.User.create(
-    {
-      name: req.body.name,
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password
-    }
-  )
-  .then( data => {
-    res.send(data)
-  })
-})
+router.post('/', controller.addUser)
 
-router.delete('/:id', (req, res) =>{
-  db.User.destroy({
-    where: {id:req.params.id}
-  })
-  .then( () =>{
-    res.send(`Anda mendelete user dengan id ${req.params.id}`)
-  })
-})
+router.delete('/:id', controller.deleteUser )
 
-router.put('/:id', (req, res) => {
-  db.User.update(
-    {
-      name: req.body.name,
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password
-    },{
-      where: {id:req.params.id}
-    }
-  )
-  .then(data =>{
-    res.send(`data dengan id ${req.params.id} sudah di update`)
-  })
-})
-
-
+router.put('/:id', controller.updateUser)
 
 
 module.exports = router;
