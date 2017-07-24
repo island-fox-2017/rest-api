@@ -9,7 +9,7 @@ router.get('/:id', controller.findById)
 
 router.post('/', controller.addUser)
 
-router.delete('/:id', controller.deleteUser )
+router.delete('/:id', controller.deleteUser)
 
 router.put('/:id', controller.updateUser)
 

@@ -29,6 +29,9 @@ const addUser = (req, res) =>{
   .then( data => {
     res.send(data)
   })
+  .catch( err =>{
+    res.status(400).send(err)
+  })
 }
 
 const deleteUser = (req, res) =>{
