@@ -1,9 +1,11 @@
+
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
+const db = require('../models')
 
 const adminOnly = (req, res, next) => {
-  let verif = jwt.verify(req.headers.token, process.env.SECRET_KEY)
-    if(verif.role == 'admin'){
+  let tokenJWT = jwt.verify(req.headers.token, process.env.SECRET_KEY)
+    if(tokenJWT.role == 'admin'){
       next();
     }else {
       res.send(`restricted page, admin only. Pls login as admin`)
@@ -11,9 +13,9 @@ const adminOnly = (req, res, next) => {
 };
 
 const adminAuthUser = (req, res, next) => {
-  let verif = jwt.verify(req.headers.token, process.env.SECRET);
- if(verif.role == 'admin' || verif.role == 'user') {
-   if (verif.role == 'user' && verif.id != req.params.id)
+  let tokenJWT = jwt.verify(req.headers.token, process.env.SECRET);
+ if(tokenJWT.role == 'admin' || tokenJWT.role == 'user') {
+   if (tokenJWT.role == 'user' && tokenJWT.id != req.params.id)
      res.send(`you're not authorized`);
    else
      next();

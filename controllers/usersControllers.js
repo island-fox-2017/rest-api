@@ -87,10 +87,10 @@ const signIn = (req, res) => {
   })
   .then( data => {
     if(bcrypt.compareSync(req.body.password, data.password)){
-      let token = jwt.sign({username: data.username, role:data.role}, process.env.SECRET_KEY)
+      var token = jwt.sign({username: data.username, role:data.role}, process.env.SECRET_KEY)
       req.headers.token = token;
       res.send({
-        msg: `User ${data.username} sukses login`,
+        msg:`User ${data.username} sukses login`,
         token: token
       })
     }else{
