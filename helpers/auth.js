@@ -13,7 +13,7 @@ const adminOnly = (req, res, next) => {
 };
 
 const adminAuthUser = (req, res, next) => {
-  let tokenJWT = jwt.verify(req.headers.token, process.env.SECRET);
+  let tokenJWT = jwt.verify(req.headers.token, process.env.SECRET_KEY);
  if(tokenJWT.role == 'admin' || tokenJWT.role == 'user') {
    if (tokenJWT.role == 'user' && tokenJWT.id != req.params.id)
      res.send(`you're not authorized`);
