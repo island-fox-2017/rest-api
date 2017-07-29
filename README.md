@@ -126,3 +126,36 @@ key and value
 token : your token when signin.
 For Administrator Only.
 Deleted user with /:id.
+
+
+
+## File and Folder 
+```bash
+.
+├── README.md
+├── rest-api
+│   ├── bin
+│   │   └── www
+│   └── config
+│   │   └── config.json
+│   └── controllers
+│   │   └── auth.js
+│   │   └── users.js
+│   └── helpers
+│   │   └── auth.js
+│   │   └── generateSalt.js
+│   │   └── hash.js
+│   └── migrations
+│   │   └── 20170724040824-create-user.js
+│   │   └── 20170724111610-addColumn_Secret_on_table_user.js
+│   │   └── 20170724111852-addColumn_role_on_table_user.js
+│   └── models
+│   │   └── index.js
+│   │   └── user.js
+│   └── routes
+│   │   └── auth.js
+│   │   └── index.js
+│   │   └── users.js
+├── package.json
+├── app.js
+├── .env.template
