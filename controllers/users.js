@@ -20,11 +20,13 @@ let postcreate = (req, res, next) => {
   db.User.create({
     username : req.body.username,
     password : req.body.password,
+    role : 'user',
     createdAt : new Date(),
     updatedAt : new Date()
   })
   .then(() => {
-    res.send('/api/admin post create user')
+    res.send(`Create User success
+      username : ${req.body.username}`)
   })
   .catch(err => {
     return res.status(400).send({
@@ -39,7 +41,7 @@ let deletedestroy = (req, res, next) => {
     where : { id : id }
   })
   .then(() => {
-    res.send('user has been deleted by ID');
+    res.send('User has been deleted.');
   })
 }
 

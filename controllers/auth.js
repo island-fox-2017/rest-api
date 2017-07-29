@@ -13,14 +13,16 @@ let signupcreate = function(req, res, next) {
     updatedAt : new Date()
   })
   .then(() => {
-    res.send('/api/signup post create user');
+    res.send(`Create User Success : 
+      username : ${req.body.username}
+      role : ${req.body.role}`);
   })
 }
 
 
 let signinpost = (req, res, next) => {
   if(!req.body.username || !req.body.password){
-    res.send('Please input username and password')
+    res.send('Please input your username and password')
   } else {
   db.User.findOne({
     where : { username : req.body.username }
@@ -34,11 +36,10 @@ let signinpost = (req, res, next) => {
       res.send('Wrong Password')
     }
     var token = jwt.sign({id: user.id, username: user.username, role: user.role}, process.env.TOKEN_KEY)
-    // res.send({
-    //   msg : 'Welcome to FirstApp',
-    //   token : token
-    // })
-    res.send(token)
+    res.send({
+      msg : 'Welcome to FirstApp! :',
+      token : token
+    })
   })
   .catch(err => {
       res.send('User not found')
